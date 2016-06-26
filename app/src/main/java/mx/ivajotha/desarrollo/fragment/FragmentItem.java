@@ -54,7 +54,7 @@ public class FragmentItem extends Fragment implements View.OnClickListener {
             mItem.setText("");
             ModelItem m = new ModelItem();
             m.id=counter;
-            m.description =item;
+            //m.description =item;
             itemList.add(m);
             lv.setAdapter(new AdapterItemList(getActivity(),itemList));
             counter++;

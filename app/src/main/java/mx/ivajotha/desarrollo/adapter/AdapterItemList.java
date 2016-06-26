@@ -29,14 +29,16 @@ public class AdapterItemList extends ArrayAdapter<ModelItem> {
         {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_list,parent,false);
         }
-        TextView txtItemDescription= (TextView) convertView.findViewById(R.id.txtItemDescription);
-        TextView txtTitle = (TextView) convertView.findViewById(R.id.txtItemTitle);
-        ImageView img = (ImageView) convertView.findViewById(R.id.row_image_view);
+        TextView txtuser = (TextView) convertView.findViewById(R.id.mUserRegister);
+        TextView txtpwd = (TextView) convertView.findViewById(R.id.mPasswordRegister);
+        //TextView txtItemDescription= (TextView) convertView.findViewById(R.id.txtItemDescription);
+        //TextView txtTitle = (TextView) convertView.findViewById(R.id.txtItemTitle);
+        //ImageView img = (ImageView) convertView.findViewById(R.id.row_image_view);
 
         ModelItem modelItem=getItem(position);
-        txtTitle.setText(modelItem.item.toUpperCase());
-        txtItemDescription.setText(modelItem.description);
-        img.setImageResource(modelItem.resourceId);
+        //txtTitle.setText(modelItem.item.toUpperCase());
+        //txtItemDescription.setText(modelItem.description);
+        //img.setImageResource(modelItem.resourceId);
         return convertView;
     }
 }

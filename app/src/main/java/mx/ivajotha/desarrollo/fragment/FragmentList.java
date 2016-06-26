@@ -48,7 +48,7 @@ public class FragmentList extends Fragment {
                 ModelItem modelItem =adapter.getItem(position);
                 ModelItem modelItem2 = array.get(position);
                 Intent intentD= new Intent(getActivity(), ActivityItem.class);
-                intentD.putExtra("key_user",modelItem2.item);
+                //intentD.putExtra("key_user",modelItem2.item);
                 startActivity(intentD);
             }
         });
@@ -64,10 +64,10 @@ public class FragmentList extends Fragment {
                 if(!TextUtils.isEmpty(itemData))
                 {
                     ModelItem item =new ModelItem();
-                    item.item=itemData;
-                    item.description  = "No.:" +counter;
-                    Matcher mat = pat.matcher(item.item);
-                    item.resourceId = mat.matches()?R.drawable.ic_thumb_down_black_24dp: R.drawable.ic_thumb_up_black_24dp;
+                    //item.item=itemData;
+                    //item.description  = "No.:" +counter;
+                    //Matcher mat = pat.matcher(item.item);
+                    //item.resourceId = mat.matches()?R.drawable.ic_thumb_down_black_24dp: R.drawable.ic_thumb_up_black_24dp;
                     array.add(item);
                     listView.setAdapter(new AdapterItemList(getActivity(),array));
                     counter++;

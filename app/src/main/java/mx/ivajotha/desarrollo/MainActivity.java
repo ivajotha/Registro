@@ -8,11 +8,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+import mx.ivajotha.desarrollo.sql.ItemDataSource;
 
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText m_Usr;
     private EditText m_Password;
+
     private View m_loading;
     String msjLogin;
 
@@ -20,8 +22,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //itemDataSource = new ItemDataSource(getApplicationContext());
+
 
         /** Obtenemos Valores de campos**/
         m_Usr= (EditText) findViewById(R.id.act_main_user);

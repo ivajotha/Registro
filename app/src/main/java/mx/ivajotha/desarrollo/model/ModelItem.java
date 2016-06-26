@@ -7,9 +7,11 @@ package mx.ivajotha.desarrollo.model;
 /**  Modelo de ItemList **/
 public class ModelItem {
     public int id;
-    public String description;
-    public String item;
+    public  String data_usr;
+    public String data_pwd;
+    public String data_lllog;
     public int resourceId;
+
 
 }
 
