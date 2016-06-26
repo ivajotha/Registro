@@ -16,6 +16,9 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import mx.ivajotha.desarrollo.model.ModelItem;
 import mx.ivajotha.desarrollo.model.ModelUser;
@@ -29,6 +32,7 @@ import mx.ivajotha.desarrollo.util.PreferenceUtil;
 public class ActivityRegister extends AppCompatActivity {
 
     private ItemDataSource itemDataSource;
+    private Pattern pat = Pattern.compile("^[a-m|A-M].*");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -41,6 +45,9 @@ public class ActivityRegister extends AppCompatActivity {
         setTitle(title_layaut);
         final EditText data_usr = (EditText) findViewById(R.id.mUserRegister);
         final EditText data_pwd = (EditText) findViewById(R.id.mPasswordRegister);
+
+
+
         /** Call myUtil**/
         findViewById(R.id.btnRegisterUser).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,16 +62,18 @@ public class ActivityRegister extends AppCompatActivity {
 
                 }else{
 
-                    /*SimpleDateFormat now = new SimpleDateFormat("yyyyMMdd_HHmmss");
-                    String currentDateandTime = sdf.format(new Date());
-                    */
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(
+                            "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    Date date = new Date();
 
-                    /*
+                    Matcher mat = pat.matcher(gdata_usr);
                     ModelItem itemDB = new ModelItem();
                     itemDB.data_usr = gdata_usr;
                     itemDB.data_pwd = gdata_pwd;
-                    itemDB.data_lllog = ""; //"(DATETIME('now'))";
-                     */
+                    itemDB.data_lllog = dateFormat.format(date);
+                    itemDB.resourceId = mat.matches()?R.drawable.ic_thumb_down_black_24dp: R.drawable.ic_thumb_up_black_24dp;
+
+                    itemDataSource.saveItem(itemDB);
 
                     //PreferenceUtil myUtil = new PreferenceUtil(getApplicationContext());
                     //myUtil.saveUser(new ModelUser(gdata_usr,gdata_pwd));

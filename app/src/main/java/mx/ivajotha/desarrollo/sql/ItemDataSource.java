@@ -29,6 +29,7 @@ public class ItemDataSource {
         contentValues.put(MySqliteHelper.COLUMN_ITEM_RESOURCE,modelItem.resourceId);
         db.insert(MySqliteHelper.TABLE_NAME,null,contentValues);
     }
+
     public void deleteItem(ModelItem modelItem)
     {
         db.delete(MySqliteHelper.TABLE_NAME,MySqliteHelper.COLUMN_ID+"=?",
