@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Login</string>
+    <string name="hit_user">User</string>
+    <string name="hit_pwd">Password</string>
+    <string name="title_main">Enter Your Account Information:</string>
+    <string name="title_inter">Hi</string>
+    <string name="app_btn_login">Login</string>
+    <string name="app_btnperfil">My profile</string>
+    <string name="app_btnaddRows">My List</string>
+    <string name="add_item">Add</string>
+    <string name="item_empty">Item can\'t be empty</string>
+    <string name="desc_item">Name</string>
+    <string name="app_btnregister">Register</string>
+    <string name="msg_fail_login">The user and/or password you entered does not match our records.</string>
+    <string name="title_register">User Registration</string>
+    <string name="msg_fiel_required">All fields are required.</string>
+    <string name="msg_register_ok">Your registration is successful</string>
+</resources>

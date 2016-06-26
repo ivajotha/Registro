@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Autenticación</string>
+    <string name="hit_user">Usuario</string>
+    <string name="hit_pwd">Contraseña</string>
+    <string name="title_main">Ingresa tu Información:</string>
+    <string name="title_inter">Hola</string>
+    <string name="app_btn_login">Ingresar</string>
+    <string name="app_btnperfil">Mi Perfil</string>
+    <string name="app_btnaddRows">Mi lista</string>
+    <string name="add_item">Agregar</string>
+    <string name="item_empty">Vacio</string>
+    <string name="desc_item">Nombre</string>
+    <string name="app_btnregister">Registro</string>
+    <string name="msg_fail_login">El usuario y/o contraseña no coinciden.</string>
+    <string name="title_register">Registro de usuario</string>
+    <string name="msg_fiel_required">Los campos son obligatorios.</string>
+    <string name="msg_register_ok">Su Registro fue Exitoso</string>
+</resources>
