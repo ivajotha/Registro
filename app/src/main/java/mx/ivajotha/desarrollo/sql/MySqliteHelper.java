@@ -10,7 +10,7 @@ import android.util.Log;
  * Created by jonathan on 25/06/16.
  */
 public class MySqliteHelper extends SQLiteOpenHelper {
-    private final static String DATABASE_NAME ="sqlitebd";
+    private final static String DATABASE_NAME ="sqlite_bd";
     private final static int DATABASE_VERSION=1;
     public static final String TABLE_NAME ="user";
     public static final String COLUMN_ID = BaseColumns._ID;
@@ -28,6 +28,7 @@ public class MySqliteHelper extends SQLiteOpenHelper {
 
     public MySqliteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        //Log.d(context,"Crear la bd;");
     }
 
     @Override

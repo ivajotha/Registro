@@ -6,6 +6,7 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -62,15 +63,15 @@ public class ActivityRegister extends AppCompatActivity {
 
                 }else{
 
-                    SimpleDateFormat dateFormat = new SimpleDateFormat(
-                            "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    Date date = new Date();
+                    //SimpleDateFormat dateFormat = new SimpleDateFormat(
+                    //        "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                    //Date date = new Date();
 
                     Matcher mat = pat.matcher(gdata_usr);
                     ModelItem itemDB = new ModelItem();
                     itemDB.data_usr = gdata_usr;
                     itemDB.data_pwd = gdata_pwd;
-                    itemDB.data_lllog = dateFormat.format(date);
+                    itemDB.data_lllog = "";
                     itemDB.resourceId = mat.matches()?R.drawable.ic_thumb_down_black_24dp: R.drawable.ic_thumb_up_black_24dp;
 
                     itemDataSource.saveItem(itemDB);
