@@ -11,15 +11,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import mx.ivajotha.desarrollo.fragment.FragmentList;
 import mx.ivajotha.desarrollo.fragment.FragmentProfile;
+import mx.ivajotha.desarrollo.model.ModelItem;
 import mx.ivajotha.desarrollo.service.ServiceTimer;
+import mx.ivajotha.desarrollo.sql.ItemDataSource;
 
 public class ActivityDetail extends AppCompatActivity implements View.OnClickListener {
+    private Integer userId;
     private String userName;
     private String userLlogin;
     private TextView txtTimer;
+
+    private ItemDataSource itemDataSource;
 
     private BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -33,6 +39,10 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity_detail);
+
+        itemDataSource = new ItemDataSource(getApplicationContext());
+
+        userId = getIntent().getExtras().getInt("key_id");
         userName=getIntent().getExtras().getString("key_user");
         userLlogin=getIntent().getExtras().getString("key_llogin");
 
@@ -41,11 +51,12 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
 
         findViewById(R.id.btnFragmentA).setOnClickListener(this);
         findViewById(R.id.btnFragmentB).setOnClickListener(this);
+        findViewById(R.id.btnLogout).setOnClickListener(this);
 
         txtTimer = (TextView) findViewById(R.id.txtTimer);
 
         showProfile(userName,userLlogin);
-        //
+
     }
 
     @Override
@@ -60,13 +71,30 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
             case R.id.btnFragmentB:
                 showList();
                 break;
+            case R.id.btnLogout:
+                logOut(userName, userId);
+                break;
         }
     }
 
+    private void logOut(String userName, Integer userId) {
+
+        ModelItem itemDB = new ModelItem();
+        itemDB.id = userId;
+        itemDataSource.deleteItem(itemDB);
+
+        String msgLogOut = getResources().getString(R.string.msg_log_out);
+        Toast.makeText(getApplicationContext(),msgLogOut+" " + userName + "!",Toast.LENGTH_SHORT).show();
+
+        finish();
+    }
+
+
     private void showList() {
-        /**  Envia Fragment para la Listas **/
+        /**  Envia Fragment Lista **/
         getFragmentManager().beginTransaction().replace(R.id.fragmentHolder,new FragmentList()).commit();
     }
+
 
     private void showProfile(String userName,String userLlogin) {
         /**  Envia Fragment para Mi perfil **/

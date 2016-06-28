@@ -28,7 +28,6 @@ public class MySqliteHelper extends SQLiteOpenHelper {
 
     public MySqliteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        //Log.d(context,"Crear la bd;");
     }
 
     @Override

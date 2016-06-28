@@ -14,7 +14,7 @@ public class ServiceTimer extends Service{
 
 
     public static final String TAG = "unam_tag";
-    public static final String ACTION_SEND_TIMER ="com.unam.clase.SEND_TIMER";
+    public static final String ACTION_SEND_TIMER =" mx.ivajotha.desarrollo.SEND_TIMER";
     int counter;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {

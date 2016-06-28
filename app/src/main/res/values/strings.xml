@@ -19,4 +19,6 @@
     <string name="msg_ok_login">Your welcome</string>
     <string name="msg_last_login">Last Login</string>
     <string name="txtRememberMe">Remember credentials.</string>
+    <string name="app_btn_clogin">Logout</string>
+    <string name="msg_log_out">Good bye</string>
 </resources>

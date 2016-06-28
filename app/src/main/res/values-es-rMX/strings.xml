@@ -20,4 +20,6 @@
     <string name="msg_ok_login">Bienvenid@</string>
     <string name="msg_last_login">Último inicio de sesión</string>
     <string name="txtRememberMe">Recordarme.</string>
+    <string name="app_btn_clogin">Salir</string>
+    <string name="msg_log_out">Adios</string>
 </resources>

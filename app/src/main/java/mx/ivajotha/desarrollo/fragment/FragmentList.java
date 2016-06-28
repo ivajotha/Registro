@@ -46,7 +46,7 @@ public class FragmentList extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AdapterItemList adapter= (AdapterItemList) parent.getAdapter();
                 ModelItem modelItem =adapter.getItem(position);
-                ModelItem modelItem2 = array.get(position);
+                //ModelItem modelItem2 = array.get(position);
                 Intent intentD= new Intent(getActivity(), ActivityItem.class);
                 //intentD.putExtra("key_user",modelItem2.item);
                 startActivity(intentD);
@@ -55,6 +55,7 @@ public class FragmentList extends Fragment {
 
 
         final EditText mItemsText = (EditText) view.findViewById(R.id.mItemText);
+
         /**  Agregar un Elemento de la lista **/
         view.findViewById(R.id.btnAddItem).setOnClickListener(new View.OnClickListener() {
             @Override

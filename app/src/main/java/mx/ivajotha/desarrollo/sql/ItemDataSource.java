@@ -68,8 +68,7 @@ public class ItemDataSource {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ID));
             String llogin = cursor.getString(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ITEM_LLOGIN));
             UpdateLlogin(id);
-
-            return new ModelUser(myUser, myPasword, llogin);
+            return new ModelUser(myUser, myPasword, llogin, id);
 
         }else{
 
@@ -77,13 +76,12 @@ public class ItemDataSource {
         }
     }
 
-/*
+
     public void deleteItem(ModelItem modelItem)
     {
         db.delete(MySqliteHelper.TABLE_NAME,MySqliteHelper.COLUMN_ID+"=?",
                 new String[]{String.valueOf(modelItem.id)});
     }
-*/
 
     public void UpdateLlogin(Integer id)
     {

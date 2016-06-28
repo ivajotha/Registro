@@ -25,13 +25,15 @@ public class PreferenceUtil {
 
     public ModelUser getUser()
     {
+        Integer mId = sp.getInt("user_id", Integer.parseInt(null));
         String mUser=sp.getString("user_name",null);
         String mPassword=sp.getString("user_password",null);
         String mllogin=sp.getString("user_llogin",null);
+
         if(TextUtils.isEmpty(mUser) || TextUtils.isEmpty(mPassword))
             return null;
 
-        return new ModelUser(mUser,mPassword, mllogin);
+        return new ModelUser(mUser,mPassword, mllogin, mId);
 
     }
 

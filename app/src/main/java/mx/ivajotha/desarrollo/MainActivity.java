@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ItemDataSource itemDataSource;
     private CheckBox checkBox;
     private View m_loading;
-    Boolean isRememberMe;
+    Boolean isRememberMe = false;
 
 
 
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     isRememberMe = false;
                 }
 
-                Log.d(ServiceTimer.TAG,"Checkeo es: "+isChecked);
+                //Log.d(ServiceTimer.TAG,"Checkeo es: "+isChecked);
             }
         });
     }
@@ -124,6 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
                     intent.putExtra("key_user",modelUser.userName);
                     intent.putExtra("key_llogin",modelUser.lastLogin);
+                    intent.putExtra("key_id",modelUser.userId);
                     startActivity(intent);
                     startService(new Intent(getApplicationContext(), ServiceTimer.class));
 
@@ -134,6 +135,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     m_Usr.setText("");
                     m_Password.setText("");
                     checkBox.setChecked(false);
+
                 }
 
             }
