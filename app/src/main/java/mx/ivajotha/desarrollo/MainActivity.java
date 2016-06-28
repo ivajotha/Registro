@@ -25,14 +25,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ItemDataSource itemDataSource;
     private CheckBox checkBox;
     private View m_loading;
-    Boolean isRememberMe = false;
 
+    private PreferenceUtil preferenceUtil;
 
+    //Boolean isRememberMe = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        preferenceUtil= new PreferenceUtil(getApplicationContext());
 
         itemDataSource = new ItemDataSource(getApplicationContext());
 
@@ -42,6 +45,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         m_loading=findViewById(R.id.progress);
         checkBox = (CheckBox) findViewById(R.id.chkRememberMe);
 
+        /** Si existen datos se agregan **/
+        ModelUser modelUser = preferenceUtil.getUser_();
+        if ( !(modelUser==null) ){
+            m_Usr.setText(modelUser.userName);
+            m_Password.setText(modelUser.password);
+            checkBox.setChecked(true);
+        }
+
+
         findViewById(R.id.act_main_login).setOnClickListener(this);
         findViewById(R.id.act_main_reg).setOnClickListener(this);
 
@@ -49,11 +61,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
-                if (isChecked) {
-                    isRememberMe = true;
-                }else{
-                    isRememberMe = false;
-                }
+
+                //if (isChecked) {
+                    //isRememberMe = true;
+                //}else{
+                    //isRememberMe = false;
+                //}
 
                 //Log.d(ServiceTimer.TAG,"Checkeo es: "+isChecked);
             }
@@ -112,13 +125,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(getApplicationContext(),msgOkLogin,Toast.LENGTH_SHORT).show();
                     //Log.d(ServiceTimer.TAG,"RECORDAR: "+isRememberMe);
 
-                    if(isRememberMe){
-                        //Log.d(ServiceTimer.TAG,"SE RECUERDA");
-                    }else{
+                    //if(isRememberMe){
+
+                        /** Creamos el archivo de Preferencias Guardamos la información **/
+                        //PreferenceUtil util = new PreferenceUtil(getApplicationContext());
+                        //util.saveUser(new ModelUser(modelUser.userName, modelUser.password, null, null));
+                    //}else{
                         //Log.d(ServiceTimer.TAG,"NO RECUERDA");
-                        m_Usr.setText("");
-                        m_Password.setText("");
-                    }
+                        //m_Usr.setText("");
+                        //m_Password.setText("");
+                    //}
 
                     /**  Comunicación una vez que esta Logueado **/
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
@@ -131,10 +147,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     String msgFailLogin = getResources().getString(R.string.msg_fail_login);
                     Toast.makeText(getApplicationContext(),msgFailLogin,Toast.LENGTH_SHORT).show();
-                    isRememberMe = false;
-                    m_Usr.setText("");
-                    m_Password.setText("");
-                    checkBox.setChecked(false);
+                    //isRememberMe = false;
+                    //m_Usr.setText("");
+                    //m_Password.setText("");
+                    //checkBox.setChecked(false);
 
                 }
 

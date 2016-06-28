@@ -79,13 +79,13 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
 
     private void logOut(String userName, Integer userId) {
 
-        ModelItem itemDB = new ModelItem();
+        /*ModelItem itemDB = new ModelItem();
         itemDB.id = userId;
         itemDataSource.deleteItem(itemDB);
 
         String msgLogOut = getResources().getString(R.string.msg_log_out);
         Toast.makeText(getApplicationContext(),msgLogOut+" " + userName + "!",Toast.LENGTH_SHORT).show();
-
+       */
         finish();
     }
 
