@@ -16,4 +16,5 @@
     <string name="title_register">Registro de usuario</string>
     <string name="msg_fiel_required">Los campos son obligatorios.</string>
     <string name="msg_register_ok">Su Registro fue Exitoso</string>
+    <string name="msg_exists_user">El nombre de usuario ya esta registrado</string>
 </resources>

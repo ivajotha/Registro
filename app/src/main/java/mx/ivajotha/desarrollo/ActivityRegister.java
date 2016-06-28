@@ -63,26 +63,29 @@ public class ActivityRegister extends AppCompatActivity {
 
                 }else{
 
-                    //SimpleDateFormat dateFormat = new SimpleDateFormat(
-                    //        "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-                    //Date date = new Date();
-
                     Matcher mat = pat.matcher(gdata_usr);
                     ModelItem itemDB = new ModelItem();
                     itemDB.data_usr = gdata_usr;
                     itemDB.data_pwd = gdata_pwd;
                     itemDB.data_lllog = "";
-                    itemDB.resourceId = mat.matches()?R.drawable.ic_thumb_down_black_24dp: R.drawable.ic_thumb_up_black_24dp;
+                    itemDB.resourceId = mat.matches() ? R.drawable.ic_thumb_down_black_24dp : R.drawable.ic_thumb_up_black_24dp;
 
-                    itemDataSource.saveItem(itemDB);
+                    /** Valida si el usuario ya esta registrado **/
+                    if (itemDataSource.searchUser(itemDB)) {
 
-                    //PreferenceUtil myUtil = new PreferenceUtil(getApplicationContext());
-                    //myUtil.saveUser(new ModelUser(gdata_usr,gdata_pwd));
+                        String fielRequired = getResources().getString(R.string.msg_exists_user);
+                        Toast.makeText(getApplicationContext(), fielRequired, Toast.LENGTH_SHORT).show();
 
-                    String fielRequired = getResources().getString(R.string.msg_register_ok);
-                    Toast.makeText(getApplicationContext(),fielRequired,Toast.LENGTH_SHORT).show();
+                    }else{
 
-                    finish();
+                        itemDataSource.saveItem(itemDB);
+
+                        String fielRequired = getResources().getString(R.string.msg_register_ok);
+                        Toast.makeText(getApplicationContext(), fielRequired, Toast.LENGTH_SHORT).show();
+
+                        finish();
+
+                    }
 
                 }
 

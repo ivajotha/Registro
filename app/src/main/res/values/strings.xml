@@ -15,4 +15,5 @@
     <string name="title_register">User Registration</string>
     <string name="msg_fiel_required">All fields are required.</string>
     <string name="msg_register_ok">Your registration is successful</string>
+    <string name="msg_exists_user">The username already registered</string>
 </resources>

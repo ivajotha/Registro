@@ -16,10 +16,13 @@ import mx.ivajotha.desarrollo.model.ModelItem;
 public class ItemDataSource {
     private final SQLiteDatabase db;
 
+
     public ItemDataSource(Context context) {
         MySqliteHelper helper = new MySqliteHelper(context);
         db=helper.getWritableDatabase();
     }
+
+
     public void saveItem(ModelItem modelItem)
     {
         ContentValues contentValues = new ContentValues();
@@ -30,11 +33,33 @@ public class ItemDataSource {
         db.insert(MySqliteHelper.TABLE_NAME,null,contentValues);
     }
 
+    public Boolean searchUser(ModelItem modelItem)
+    {
+        Boolean existUser = false;
+        int count;
+
+        String myUser = modelItem.data_usr;
+        String selection = MySqliteHelper.COLUMN_ITEM_USR + "=?";
+        String[] selectionArgs = {myUser};
+        Cursor c = db.query(MySqliteHelper.TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
+        count = c.getCount();
+        /*Cursor cursor = db.query(MySqliteHelper.TABLE_NAME,null,"user=?",new String[]{"user"},null,null,null);
+        count = cursor.getCount();
+        */
+
+        if (count > 0 )
+            existUser = true;
+
+        return existUser;
+    }
+
     public void deleteItem(ModelItem modelItem)
     {
         db.delete(MySqliteHelper.TABLE_NAME,MySqliteHelper.COLUMN_ID+"=?",
                 new String[]{String.valueOf(modelItem.id)});
     }
+
+
 /*
     public List<ModelItem> getAllItems()
     {
