@@ -16,4 +16,6 @@
     <string name="msg_fiel_required">All fields are required.</string>
     <string name="msg_register_ok">Your registration is successful</string>
     <string name="msg_exists_user">The username already registered</string>
+    <string name="msg_ok_login">Your welcome</string>
+    <string name="msg_last_login">Último inicio de sesión</string>
 </resources>

@@ -8,13 +8,16 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import mx.ivajotha.desarrollo.model.ModelItem;
+import mx.ivajotha.desarrollo.model.ModelUser;
 import mx.ivajotha.desarrollo.sql.ItemDataSource;
+import mx.ivajotha.desarrollo.util.PreferenceUtil;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText m_Usr;
     private EditText m_Password;
-
+    private ItemDataSource itemDataSource;
     private View m_loading;
     String msjLogin;
 
@@ -22,14 +25,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //itemDataSource = new ItemDataSource(getApplicationContext());
-
+        itemDataSource = new ItemDataSource(getApplicationContext());
 
         /** Obtenemos Valores de campos**/
         m_Usr= (EditText) findViewById(R.id.act_main_user);
@@ -53,9 +52,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
-
-
-
     }
 
     /**  Function Register **/
@@ -81,13 +77,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 m_loading.setVisibility(View.GONE);
 
-                if(m_user.equals("ivan") && m_pass.equals("entra"))
+                ModelItem itemDB = new ModelItem();
+                itemDB.data_usr = m_user;
+                itemDB.data_pwd = m_pass;
+
+                //if(m_user.equals("ivan") && m_pass.equals("entra"))
+                ModelUser modelUser= itemDataSource.isRegistered(itemDB);
+
+                if(modelUser !=null)
                 {
 
-                    Toast.makeText(getApplicationContext(),"Correcto",Toast.LENGTH_SHORT).show();
+                    String msgOkLogin = getResources().getString(R.string.title_inter);
+                    Toast.makeText(getApplicationContext(),msgOkLogin,Toast.LENGTH_SHORT).show();
+
                     /**  Comunicación una vez que esta Logueado **/
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
-                    intent.putExtra("key_user",m_user);
+                    intent.putExtra("key_user",modelUser.userName);
+                    intent.putExtra("key_llogin",modelUser.lastLogin);
                     startActivity(intent);
 
                 } else {
@@ -96,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 }
 
             }
-        }, 1000 * 4);
+        }, 1000 * 2);
 
     }
 }

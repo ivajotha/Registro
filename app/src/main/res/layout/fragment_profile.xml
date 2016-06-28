@@ -3,6 +3,14 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/txtLastLogin"
+        android:gravity="right"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#111" />
+
     <ImageView
         android:id="@+id/imgProfile"
         android:src="@drawable/ic_action_settings_voice"

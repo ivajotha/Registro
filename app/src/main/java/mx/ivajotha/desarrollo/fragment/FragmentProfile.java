@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,10 +27,11 @@ public class FragmentProfile extends Fragment {
     private ImageView imgProfile;
     private boolean change=true;
 
-    public static FragmentProfile newInstance(String name){
+    public static FragmentProfile newInstance(String name, String lLogin){
         FragmentProfile f = new FragmentProfile();
         Bundle b = new Bundle();
         b.putString("user_key",name);
+        b.putString("user_llogin",lLogin);
         f.setArguments(b);
         return f;
     }
@@ -47,10 +50,14 @@ public class FragmentProfile extends Fragment {
 
         imgProfile = (ImageView) view.findViewById(R.id.imgProfile);
         TextView txt = (TextView) view.findViewById(R.id.txtUserFragment);
+        TextView llogin = (TextView) view.findViewById(R.id.txtLastLogin);
         Bundle bundle=getArguments();
 
         String myname = (bundle!=null? bundle.getString("user_key"): "");
+        String myllogin = (bundle!=null? bundle.getString("user_llogin"):new SimpleDateFormat("dd-MMM-yy hh:mm").format(new Date()));
         txt.setText(myname);
+        String txt_msg_llogin = getResources().getString(R.string.msg_last_login);
+        llogin.setText(txt_msg_llogin + ": " + myllogin);
 
         Matcher mat = pat.matcher(myname);
         imgProfile.setImageResource(mat.matches()?R.drawable.ic_thumb_down_black_24dp: R.drawable.ic_thumb_up_black_24dp);

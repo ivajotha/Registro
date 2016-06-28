@@ -5,16 +5,21 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import mx.ivajotha.desarrollo.model.ModelItem;
+import mx.ivajotha.desarrollo.model.ModelUser;
+import mx.ivajotha.desarrollo.util.PreferenceUtil;
 
 /**
  * Created by jonathan on 25/06/16.
  */
 public class ItemDataSource {
     private final SQLiteDatabase db;
+    private PreferenceUtil preferenceUtil;
 
 
     public ItemDataSource(Context context) {
@@ -43,9 +48,6 @@ public class ItemDataSource {
         String[] selectionArgs = {myUser};
         Cursor c = db.query(MySqliteHelper.TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
         count = c.getCount();
-        /*Cursor cursor = db.query(MySqliteHelper.TABLE_NAME,null,"user=?",new String[]{"user"},null,null,null);
-        count = cursor.getCount();
-        */
 
         if (count > 0 )
             existUser = true;
@@ -53,10 +55,47 @@ public class ItemDataSource {
         return existUser;
     }
 
+    public ModelUser isRegistered(ModelItem modelItem)
+    {
+        String myUser = modelItem.data_usr;
+        String myPasword = modelItem.data_pwd;
+        String selection = MySqliteHelper.COLUMN_ITEM_USR + "=? AND " + MySqliteHelper.COLUMN_ITEM_PWD + "=?" ;
+        String[] selectionArgs = {myUser,myPasword};
+        Cursor cursor = db.query(MySqliteHelper.TABLE_NAME, null, selection, selectionArgs, null, null, null, null);
+
+        if(cursor.moveToNext()){
+
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ID));
+            String llogin = cursor.getString(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ITEM_LLOGIN));
+            UpdateLlogin(id);
+
+            return new ModelUser(myUser, myPasword, llogin);
+
+        }else{
+
+            return null;
+        }
+    }
+
+/*
     public void deleteItem(ModelItem modelItem)
     {
         db.delete(MySqliteHelper.TABLE_NAME,MySqliteHelper.COLUMN_ID+"=?",
                 new String[]{String.valueOf(modelItem.id)});
+    }
+*/
+
+    public void UpdateLlogin(Integer id)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String strDate = sdf.format(new Date());
+
+
+        ContentValues cv = new ContentValues();
+        cv.put(MySqliteHelper.COLUMN_ITEM_LLOGIN,strDate);
+
+        String selection = "_id="+id;
+        db.update(MySqliteHelper.TABLE_NAME, cv, selection, null);
     }
 
 

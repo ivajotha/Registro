@@ -12,6 +12,5 @@ public class ModelItem {
     public String data_lllog;
     public int resourceId;
 
-
 }
 

@@ -27,9 +27,11 @@ public class PreferenceUtil {
     {
         String mUser=sp.getString("user_name",null);
         String mPassword=sp.getString("user_password",null);
+        String mllogin=sp.getString("user_llogin",null);
         if(TextUtils.isEmpty(mUser) || TextUtils.isEmpty(mPassword))
             return null;
-        return new ModelUser(mUser,mPassword);
+
+        return new ModelUser(mUser,mPassword, mllogin);
 
     }
 
