@@ -19,4 +19,5 @@
     <string name="msg_exists_user">El nombre de usuario ya esta registrado</string>
     <string name="msg_ok_login">Bienvenid@</string>
     <string name="msg_last_login">Último inicio de sesión</string>
+    <string name="txtRememberMe">Recordarme.</string>
 </resources>

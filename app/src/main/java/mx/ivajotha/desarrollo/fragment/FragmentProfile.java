@@ -54,7 +54,9 @@ public class FragmentProfile extends Fragment {
         Bundle bundle=getArguments();
 
         String myname = (bundle!=null? bundle.getString("user_key"): "");
-        String myllogin = (bundle!=null? bundle.getString("user_llogin"):new SimpleDateFormat("dd-MMM-yy hh:mm").format(new Date()));
+        String llogin_ =  bundle.getString("user_llogin");
+
+        String myllogin = (llogin_!=null?  bundle.getString("user_llogin"):new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()));
         txt.setText(myname);
         String txt_msg_llogin = getResources().getString(R.string.msg_last_login);
         llogin.setText(txt_msg_llogin + ": " + myllogin);

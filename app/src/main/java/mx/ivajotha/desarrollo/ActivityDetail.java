@@ -41,9 +41,11 @@ public class ActivityDetail extends AppCompatActivity implements View.OnClickLis
 
         findViewById(R.id.btnFragmentA).setOnClickListener(this);
         findViewById(R.id.btnFragmentB).setOnClickListener(this);
+
         txtTimer = (TextView) findViewById(R.id.txtTimer);
 
         showProfile(userName,userLlogin);
+        //
     }
 
     @Override

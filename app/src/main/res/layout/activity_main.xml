@@ -43,11 +43,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <CheckBox
+        android:id="@+id/chkRememberMe"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/act_main_pwd"
+        android:text="@string/txtRememberMe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <ProgressBar
         android:id="@+id/progress"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        android:layout_below="@id/act_main_pwd"
+        android:layout_below="@id/chkRememberMe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -77,6 +85,5 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
 
 </RelativeLayout>

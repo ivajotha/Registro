@@ -67,7 +67,7 @@ public class ActivityRegister extends AppCompatActivity {
                     ModelItem itemDB = new ModelItem();
                     itemDB.data_usr = gdata_usr;
                     itemDB.data_pwd = gdata_pwd;
-                    itemDB.data_lllog = "";
+                    itemDB.data_lllog = null;
                     itemDB.resourceId = mat.matches() ? R.drawable.ic_thumb_down_black_24dp : R.drawable.ic_thumb_up_black_24dp;
 
                     /** Valida si el usuario ya esta registrado **/
