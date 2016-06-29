@@ -27,8 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private View m_loading;
 
     private PreferenceUtil preferenceUtil;
-
-    //Boolean isRememberMe = false;
+    Boolean isRememberMe = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         m_loading=findViewById(R.id.progress);
         checkBox = (CheckBox) findViewById(R.id.chkRememberMe);
 
-        /** Si existen datos se agregan **/
+        /** Si existen datos se agregagan a los campos y se marca la opcion de recordad **/
         ModelUser modelUser = preferenceUtil.getUser_();
         if ( !(modelUser==null) ){
             m_Usr.setText(modelUser.userName);
@@ -61,14 +60,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+                /** Verificamos si el usuario quiere recordar su datos.**/
+                if (isChecked) {
+                    isRememberMe = true;
+                }else{
+                    isRememberMe = false;
+                }
 
-                //if (isChecked) {
-                    //isRememberMe = true;
-                //}else{
-                    //isRememberMe = false;
-                //}
-
-                //Log.d(ServiceTimer.TAG,"Checkeo es: "+isChecked);
             }
         });
     }
@@ -100,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         final String m_user = m_Usr.getText().toString();
         final String m_pass = m_Password.getText().toString();
+        final PreferenceUtil util = new PreferenceUtil(getApplicationContext());
 
         m_loading.setVisibility(View.VISIBLE);
 
@@ -117,24 +116,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //if(m_user.equals("ivan") && m_pass.equals("entra"))
                 ModelUser modelUser= itemDataSource.isRegistered(itemDB);
-
                 if(modelUser !=null)
                 {
 
                     String msgOkLogin = getResources().getString(R.string.title_inter);
                     Toast.makeText(getApplicationContext(),msgOkLogin,Toast.LENGTH_SHORT).show();
-                    //Log.d(ServiceTimer.TAG,"RECORDAR: "+isRememberMe);
 
-                    //if(isRememberMe){
+                    if(isRememberMe){
 
                         /** Creamos el archivo de Preferencias Guardamos la información **/
-                        //PreferenceUtil util = new PreferenceUtil(getApplicationContext());
-                        //util.saveUser(new ModelUser(modelUser.userName, modelUser.password, null, null));
-                    //}else{
+
+                        util.saveUser(new ModelUser(modelUser.userName, modelUser.password, null, null));
+
+                    }else{
+                        util.saveUser(new ModelUser("", "", null, null));
                         //Log.d(ServiceTimer.TAG,"NO RECUERDA");
-                        //m_Usr.setText("");
-                        //m_Password.setText("");
-                    //}
+                        m_Usr.setText("");
+                        m_Password.setText("");
+                    }
 
                     /**  Comunicación una vez que esta Logueado **/
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
@@ -147,10 +146,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     String msgFailLogin = getResources().getString(R.string.msg_fail_login);
                     Toast.makeText(getApplicationContext(),msgFailLogin,Toast.LENGTH_SHORT).show();
-                    //isRememberMe = false;
-                    //m_Usr.setText("");
-                    //m_Password.setText("");
-                    //checkBox.setChecked(false);
+
+                    isRememberMe = false;
+                    util.saveUser(new ModelUser("", "", null, null));
+                    m_Usr.setText("");
+                    m_Password.setText("");
+                    checkBox.setChecked(false);
 
                 }
 
