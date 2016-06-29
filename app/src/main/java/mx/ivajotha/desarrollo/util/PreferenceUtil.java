@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.text.TextUtils;
 
-import mx.ivajotha.desarrollo.model.ModelRemember;
 import mx.ivajotha.desarrollo.model.ModelUser;
 
 /**

@@ -26,15 +26,16 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:id="@+id/txtItemTitle"
-
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
         <TextView
             android:textSize="15sp"
             android:layout_weight="1"
             android:id="@+id/txtItemDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </LinearLayout>
 
 </LinearLayout>

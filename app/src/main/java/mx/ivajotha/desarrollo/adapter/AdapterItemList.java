@@ -12,14 +12,15 @@ import java.util.List;
 
 import mx.ivajotha.desarrollo.R;
 import mx.ivajotha.desarrollo.model.ModelItem;
+import mx.ivajotha.desarrollo.model.ModelItemList;
 
 /**
  * Created by jonathan on 20/06/16.
  */
 
 /**  Adaptador del ItemList **/
-public class AdapterItemList extends ArrayAdapter<ModelItem> {
-    public AdapterItemList(Context context,List<ModelItem> objects) {
+public class AdapterItemList extends ArrayAdapter<ModelItemList> {
+    public AdapterItemList(Context context,List<ModelItemList> objects) {
         super(context, 0, objects);
     }
 
@@ -29,16 +30,15 @@ public class AdapterItemList extends ArrayAdapter<ModelItem> {
         {
             convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_list,parent,false);
         }
-        TextView txtuser = (TextView) convertView.findViewById(R.id.mUserRegister);
-        TextView txtpwd = (TextView) convertView.findViewById(R.id.mPasswordRegister);
-        //TextView txtItemDescription= (TextView) convertView.findViewById(R.id.txtItemDescription);
-        //TextView txtTitle = (TextView) convertView.findViewById(R.id.txtItemTitle);
-        //ImageView img = (ImageView) convertView.findViewById(R.id.row_image_view);
 
-        ModelItem modelItem=getItem(position);
-        //txtTitle.setText(modelItem.item.toUpperCase());
-        //txtItemDescription.setText(modelItem.description);
-        //img.setImageResource(modelItem.resourceId);
+        TextView txtTitle = (TextView) convertView.findViewById(R.id.txtItemTitle);
+        TextView txtItemDescription= (TextView) convertView.findViewById(R.id.txtItemDescription);
+        ImageView img = (ImageView) convertView.findViewById(R.id.row_image_view);
+
+        ModelItemList modelItemList=getItem(position);
+        txtTitle.setText(modelItemList.item);
+        txtItemDescription.setText(modelItemList.description);
+        img.setImageResource(modelItemList.resourceId);
         return convertView;
     }
 }

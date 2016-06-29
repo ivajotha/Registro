@@ -48,7 +48,6 @@ public class MySqliteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
         db.execSQL(CREATE_TABLE);
         db.execSQL(CREATE_TABLE_TL);
     }
@@ -56,6 +55,8 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         //Log.d(ServiceTimer.TAG,"OnUpgrade SQL from "+oldVersion+ " to "+newVersion);
+        db.delete(CREATE_TABLE, null, null);
+        db.delete(CREATE_TABLE_TL, null, null);
 
     }
 }

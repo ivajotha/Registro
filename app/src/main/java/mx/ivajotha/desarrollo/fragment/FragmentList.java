@@ -23,6 +23,8 @@ import mx.ivajotha.desarrollo.ActivityItem;
 import mx.ivajotha.desarrollo.R;
 import mx.ivajotha.desarrollo.adapter.AdapterItemList;
 import mx.ivajotha.desarrollo.model.ModelItem;
+import mx.ivajotha.desarrollo.model.ModelItemList;
+import mx.ivajotha.desarrollo.sql.ItemDataSource;
 
 /**
  * Created by jonathan on 20/06/16.
@@ -30,23 +32,72 @@ import mx.ivajotha.desarrollo.model.ModelItem;
 
 public class FragmentList extends Fragment {
     private ListView listView;
-    private List<ModelItem> array = new ArrayList<>();
+    //private List<ModelItemList> array = new ArrayList<>();
     private int counter;
     private boolean isWifi;
+    private ItemDataSource itemDS;
+
+    public void onCreate(Bundle saveInstanceState){
+        super.onCreate(saveInstanceState);
+        itemDS = new ItemDataSource(getActivity());
+    }
+
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_list,container,false);
         listView = (ListView) view.findViewById(R.id.listItems);
 
-        /**  Click para mostra detalle del elemento de la lista **/
+        listView.setAdapter(new AdapterItemList(getActivity(),itemDS.getallItems()));
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AdapterItemList adapter = (AdapterItemList) parent.getAdapter();
+                ModelItemList modelItemList = adapter.getItem(position);
+                Toast.makeText(getActivity(),modelItemList.item,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        final EditText mItemsText = (EditText) view.findViewById(R.id.mItemText);
+        view.findViewById(R.id.btnAddItem).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String itemData = mItemsText.getText().toString();
+                if(!TextUtils.isEmpty(itemData)){
+                    ModelItemList modelItemList = new ModelItemList();
+                    modelItemList.item = itemData;
+                    modelItemList.description  = "Description " + counter;
+                    modelItemList.resourceId = isWifi? R.drawable.ic_device_signal_wifi_4_bar: R.drawable.ic_action_settings_voice;
+                    itemDS.saveItemList(modelItemList);
+                    listView.setAdapter(new AdapterItemList(getActivity(),itemDS.getallItems()));
+                    isWifi=!isWifi;
+                    counter++;
+                    mItemsText.setText("");
+                }else{
+                    Toast.makeText(getActivity(),"Ingresa información",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+        return view;
+    }
+
+/*        View view = inflater.inflate(R.layout.fragment_list,container,false);
+        listView = (ListView) view.findViewById(R.id.listItems);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AdapterItemList adapter= (AdapterItemList) parent.getAdapter();
-                ModelItem modelItem =adapter.getItem(position);
-                //ModelItem modelItem2 = array.get(position);
+                ModelItemList modelItemList =adapter.getItem(position);
+                ModelItem modelItem2 = array.get(position);
                 Intent intentD= new Intent(getActivity(), ActivityItem.class);
                 //intentD.putExtra("key_user",modelItem2.item);
                 startActivity(intentD);
@@ -55,8 +106,6 @@ public class FragmentList extends Fragment {
 
 
         final EditText mItemsText = (EditText) view.findViewById(R.id.mItemText);
-
-        /**  Agregar un Elemento de la lista **/
         view.findViewById(R.id.btnAddItem).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,4 +128,5 @@ public class FragmentList extends Fragment {
         });
         return view;
     }
+*/
 }

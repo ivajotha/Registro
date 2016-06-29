@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import mx.ivajotha.desarrollo.model.ModelItem;
+import mx.ivajotha.desarrollo.model.ModelItemList;
 import mx.ivajotha.desarrollo.model.ModelUser;
 import mx.ivajotha.desarrollo.util.PreferenceUtil;
 
@@ -76,7 +77,6 @@ public class ItemDataSource {
         }
     }
 
-
     public void deleteItem(ModelItem modelItem)
     {
         db.delete(MySqliteHelper.TABLE_NAME,MySqliteHelper.COLUMN_ID+"=?",
@@ -97,26 +97,36 @@ public class ItemDataSource {
     }
 
 
-/*
-    public List<ModelItem> getAllItems()
-    {
-        List<ModelItem> modelItemList = new ArrayList<>();
-        Cursor cursor =db.query(MySqliteHelper.TABLE_NAME,null,null,null,null,null,null);
-        while (cursor.moveToNext())
-        {
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ID));
-            String itemName=cursor.getString(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ITEM_NAME));
-            String desccription = cursor.getString(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ITEM_DESC));
-            int resourceId = cursor.getInt(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ITEM_RESOURCE));
-            ModelItem modelItem = new ModelItem();
-            modelItem.id=id;
-            modelItem.resourceId=resourceId;
-            modelItem.description=desccription;
-            modelItem.item=itemName;
-            modelItemList.add(modelItem);
+    /*** ITEMS ***/
+    /** Agrega un Item a la BD **/
+
+    public void saveItemList(ModelItemList modelItemList) {
+        ContentValues cv = new ContentValues();
+        cv.put(MySqliteHelper.COLUMN_TL_NAME, modelItemList.item);
+        cv.put(MySqliteHelper.COLUMN_TL_DESC, modelItemList.description);
+        cv.put(MySqliteHelper.COLUMN_TL_RESOURCE, modelItemList.resourceId);
+        db.insert(MySqliteHelper.TABLE_NAME_TL, null, cv);
+    }
+
+
+    public List<ModelItemList> getallItems(){
+        List<ModelItemList> modelItemLists = new ArrayList<>();
+        Cursor cursor= db.query(MySqliteHelper.TABLE_NAME_TL,null,null,null,null,null,null);
+        while (cursor.moveToNext()) {
+            int id_item = cursor.getInt(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_ID));
+            String item_name=cursor.getString(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_TL_NAME));
+            String description = cursor.getString(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_TL_DESC));
+            int resourceId = cursor.getInt(cursor.getColumnIndexOrThrow(MySqliteHelper.COLUMN_TL_RESOURCE));
+
+            ModelItemList modelItemList = new ModelItemList();
+            modelItemList.id = id_item;
+            modelItemList.item = item_name;
+            modelItemList.description = description;
+            modelItemList.resourceId = resourceId;
+            modelItemLists.add(modelItemList);
+
         }
 
-        return modelItemList;
+        return  modelItemLists;
     }
-*/
 }

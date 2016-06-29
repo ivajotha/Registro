@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import mx.ivajotha.desarrollo.R;
 import mx.ivajotha.desarrollo.adapter.AdapterItemList;
 import mx.ivajotha.desarrollo.model.ModelItem;
+import mx.ivajotha.desarrollo.model.ModelItemList;
 
 /**
  * Created by jonathan on 20/06/16.
@@ -23,7 +24,7 @@ import mx.ivajotha.desarrollo.model.ModelItem;
 public class FragmentItem extends Fragment implements View.OnClickListener {
     private ListView lv;
     private EditText mItem;
-    private ArrayList<ModelItem> itemList= new ArrayList<>();
+    private ArrayList<ModelItemList> itemList= new ArrayList<>();
     private int counter;
 
     @Nullable
@@ -52,9 +53,8 @@ public class FragmentItem extends Fragment implements View.OnClickListener {
         else
         {
             mItem.setText("");
-            ModelItem m = new ModelItem();
+            ModelItemList m = new ModelItemList();
             m.id=counter;
-            //m.description =item;
             itemList.add(m);
             lv.setAdapter(new AdapterItemList(getActivity(),itemList));
             counter++;
