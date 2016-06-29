@@ -32,7 +32,6 @@ import mx.ivajotha.desarrollo.sql.ItemDataSource;
 
 public class FragmentList extends Fragment {
     private ListView listView;
-    //private List<ModelItemList> array = new ArrayList<>();
     private int counter;
     private boolean isWifi;
     private ItemDataSource itemDS;
@@ -67,10 +66,15 @@ public class FragmentList extends Fragment {
             @Override
             public void onClick(View v) {
                 String itemData = mItemsText.getText().toString();
+                String msg_desc = getResources().getString(R.string.msg_desc);
+                String msg_txt_empty = getResources().getString(R.string.msg_txt_empty);
+
+
                 if(!TextUtils.isEmpty(itemData)){
                     ModelItemList modelItemList = new ModelItemList();
                     modelItemList.item = itemData;
-                    modelItemList.description  = "Description " + counter;
+
+                    modelItemList.description  = msg_desc + counter;
                     modelItemList.resourceId = isWifi? R.drawable.ic_device_signal_wifi_4_bar: R.drawable.ic_action_settings_voice;
                     itemDS.saveItemList(modelItemList);
                     listView.setAdapter(new AdapterItemList(getActivity(),itemDS.getallItems()));
@@ -78,7 +82,7 @@ public class FragmentList extends Fragment {
                     counter++;
                     mItemsText.setText("");
                 }else{
-                    Toast.makeText(getActivity(),"Ingresa información",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),msg_txt_empty,Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -88,45 +92,4 @@ public class FragmentList extends Fragment {
         return view;
     }
 
-/*        View view = inflater.inflate(R.layout.fragment_list,container,false);
-        listView = (ListView) view.findViewById(R.id.listItems);
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AdapterItemList adapter= (AdapterItemList) parent.getAdapter();
-                ModelItemList modelItemList =adapter.getItem(position);
-                ModelItem modelItem2 = array.get(position);
-                Intent intentD= new Intent(getActivity(), ActivityItem.class);
-                //intentD.putExtra("key_user",modelItem2.item);
-                startActivity(intentD);
-            }
-        });
-
-
-        final EditText mItemsText = (EditText) view.findViewById(R.id.mItemText);
-        view.findViewById(R.id.btnAddItem).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String itemData = mItemsText.getText().toString();
-                Pattern pat = Pattern.compile("^[a-m|A-M].*");
-                if(!TextUtils.isEmpty(itemData))
-                {
-                    ModelItem item =new ModelItem();
-                    //item.item=itemData;
-                    //item.description  = "No.:" +counter;
-                    //Matcher mat = pat.matcher(item.item);
-                    //item.resourceId = mat.matches()?R.drawable.ic_thumb_down_black_24dp: R.drawable.ic_thumb_up_black_24dp;
-                    array.add(item);
-                    listView.setAdapter(new AdapterItemList(getActivity(),array));
-                    counter++;
-                    mItemsText.setText("");
-                }
-
-            }
-        });
-        return view;
-    }
-*/
 }

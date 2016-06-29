@@ -22,4 +22,6 @@
     <string name="txtRememberMe">Recordarme.</string>
     <string name="app_btn_clogin">Salir</string>
     <string name="msg_log_out">Adios</string>
+    <string name="msg_desc">Descripción</string>
+    <string name="msg_txt_empty">Ingresa el Nombre</string>
 </resources>

@@ -21,4 +21,6 @@
     <string name="txtRememberMe">Remember credentials.</string>
     <string name="app_btn_clogin">Logout</string>
     <string name="msg_log_out">Good bye</string>
+    <string name="msg_desc">Descrition</string>
+    <string name="msg_txt_empty">Enter name</string>
 </resources>
