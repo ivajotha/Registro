@@ -19,6 +19,14 @@ public class MySqliteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_LLOGIN = "sqltime";
     public static final String COLUMN_ITEM_RESOURCE = "resource_id";
 
+
+    public final static String TABLE_NAME_TL = "items";
+    public final static String COLUMN_TL_ID = BaseColumns._ID;
+    public final static String COLUMN_TL_NAME = "name";
+    public final static String COLUMN_TL_DESC = "description";
+    public final static String COLUMN_TL_RESOURCE = "resource";
+
+
     private static final String CREATE_TABLE ="create table "+TABLE_NAME+
             "("+COLUMN_ID+" integer primary key autoincrement,"+
             COLUMN_ITEM_USR+" TEXT NOT NULL,"+
@@ -26,13 +34,23 @@ public class MySqliteHelper extends SQLiteOpenHelper {
             COLUMN_ITEM_LLOGIN+ " TIMESTAMP DEFAULT CURRENT_TIMESTAMP,"+
             COLUMN_ITEM_RESOURCE+" INTEGER NOT NULL)";
 
+
+    private static final String CREATE_TABLE_TL = "create table " + TABLE_NAME_TL +
+            "("+COLUMN_TL_ID+" integer primary key autoincrement,"+
+            COLUMN_TL_NAME +" TEXT NOT NULL,"+
+            COLUMN_TL_DESC + " TEXT NOT NULL,"+
+            COLUMN_TL_RESOURCE +" TEXT NOT NULL)";
+
     public MySqliteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         db.execSQL(CREATE_TABLE);
+        db.execSQL(CREATE_TABLE_TL);
     }
 
     @Override

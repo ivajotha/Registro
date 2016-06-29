@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if ( !(modelUser==null) ){
             m_Usr.setText(modelUser.userName);
             m_Password.setText(modelUser.password);
+            isRememberMe = true;
             checkBox.setChecked(true);
         }
 
@@ -125,25 +126,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     if(isRememberMe){
 
                         /** Creamos el archivo de Preferencias Guardamos la información **/
-
                         util.saveUser(new ModelUser(modelUser.userName, modelUser.password, null, null));
 
                     }else{
+
                         util.saveUser(new ModelUser("", "", null, null));
-                        //Log.d(ServiceTimer.TAG,"NO RECUERDA");
                         m_Usr.setText("");
                         m_Password.setText("");
                     }
 
                     /**  Comunicación una vez que esta Logueado **/
+
                     Intent intent= new Intent(getApplicationContext(),ActivityDetail.class);
                     intent.putExtra("key_user",modelUser.userName);
                     intent.putExtra("key_llogin",modelUser.lastLogin);
                     intent.putExtra("key_id",modelUser.userId);
+
                     startActivity(intent);
                     startService(new Intent(getApplicationContext(), ServiceTimer.class));
 
                 } else {
+
                     String msgFailLogin = getResources().getString(R.string.msg_fail_login);
                     Toast.makeText(getApplicationContext(),msgFailLogin,Toast.LENGTH_SHORT).show();
 
